@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SterrenbeeldService", "SterrenbeeldService\SterrenbeeldService.csproj", "{405D2E9A-B053-4590-91BB-6EC242113FB6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SterrenbeeldClient", "SterrenbeeldClient\SterrenbeeldClient.csproj", "{9AB1D92C-08A4-4D37-9000-805C43A19D2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{405D2E9A-B053-4590-91BB-6EC242113FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{405D2E9A-B053-4590-91BB-6EC242113FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{405D2E9A-B053-4590-91BB-6EC242113FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{405D2E9A-B053-4590-91BB-6EC242113FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AB1D92C-08A4-4D37-9000-805C43A19D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB1D92C-08A4-4D37-9000-805C43A19D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB1D92C-08A4-4D37-9000-805C43A19D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB1D92C-08A4-4D37-9000-805C43A19D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9269FB26-552B-4912-9842-0CD1D16FCCF0}
+	EndGlobalSection
+EndGlobal
