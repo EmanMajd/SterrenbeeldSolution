@@ -1,13 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
-using SterrenbeeldService.Models;
-using Microsoft.EntityFrameworkCore;
+﻿
 using System.Net;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Hosting;
-
-
-
 
 
 Console.Write("Geef de dag van je geboortedatum: ");
@@ -26,7 +18,7 @@ static string GetSterrenbeeld(int dag, int maand)
 {
 	using (var client = new HttpClient())
 	{
-		string apiUrl = $"http://localhost:5000/api/sterrenbeelden/{dag}-{maand}";
+		string apiUrl = $"http://localhost:5000/sterrenbeelden/{dag}-{maand}";
 		var response = client.GetAsync(apiUrl).Result;
 
 		if (response.StatusCode == HttpStatusCode.OK)
