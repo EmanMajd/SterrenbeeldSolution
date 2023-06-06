@@ -1,6 +1,10 @@
 ﻿
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using SterrenbeeldService.Controllers;
 using System.Net;
+
+
 
 
 Console.Write("Geef de dag van je geboortedatum: ");
@@ -28,13 +32,14 @@ static string GetSterrenbeeld(int dag, int maand)
 	using (var client = new HttpClient())
 	{
 		string apiUrl = $"http://localhost:5000/sterrenbeelden/{dag}-{maand}";
-		var response = client.GetAsync($"http://localhost:5000/sterrenbeelden/{dag}-{maand}").Result; 
-		//var response = await client.GetAsync(apiUrl).Result;
+		var response = client.GetAsync(apiUrl).Result;
 
 		if (response.StatusCode == HttpStatusCode.OK)
 		{
-			Console.WriteLine(response.Content.ReadAsAsync<string>());
-			return response.Content.ReadAsAsync<string>().Result.ToString();
+			string sterrenbeeld1 = response.Content.ReadAsStringAsync().Result;
+
+			Console.WriteLine(sterrenbeeld1);
+			return sterrenbeeld1;
 		}
 		else if (response.StatusCode == HttpStatusCode.BadRequest)
 		{
@@ -50,7 +55,22 @@ static string GetSterrenbeeld(int dag, int maand)
 		}
 	}
 }
-	
+/*
+using var client = new HttpClient(); 
+var response = await client.GetAsync($"http://localhost:5000/sterrenbeelden/{dag}-{maand}");
+switch (response.StatusCode) 
+{
+case HttpStatusCode.OK:
+		string sterrenbeeld1 = response.Content.ReadAsStringAsync().Result;
+		Console.WriteLine(sterrenbeeld1);
+	break;
+case HttpStatusCode.NotFound: 
+Console.WriteLine("foutieve");
+	break;
+	default:
+Console.WriteLine("Technisch probleem, contacteer de helpdesk.");
+	break;
+}*/
 
 /*app.MapGet("sterrenbeelden", (SterrenbeeldController db) =>
  db.FindAll().ToString());*/

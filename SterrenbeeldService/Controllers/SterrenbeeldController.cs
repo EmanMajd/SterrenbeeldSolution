@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SterrenbeeldService.Models;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Runtime.Intrinsics.Arm;
 
