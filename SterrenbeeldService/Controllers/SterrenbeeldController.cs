@@ -59,16 +59,8 @@ public class SterrenbeeldController : ControllerBase
 				DateTime startdate = new DateTime(jaar, sterrenbeeld.StartMaand, sterrenbeeld.StartDag);
 				DateTime eindtdate = new DateTime(jaar, sterrenbeeld.EindMaand, sterrenbeeld.EindDag);
 
-				bool v1 = DateTime.Equals(dateTime, startdate);
-				bool v2 = DateTime.Equals(dateTime, eindtdate);
-
-				int valid1 = DateTime.Compare(dateTime, startdate);
-				int valid2 = DateTime.Compare(dateTime, eindtdate);
-
-				//if (v1 || v2) return sterrenbeeld.Naam;
 
 				if (dateTime >= startdate && dateTime <= eindtdate ) return sterrenbeeld.Naam;
-
 
 			}
 
@@ -84,3 +76,10 @@ public class SterrenbeeldController : ControllerBase
 }
 
 
+//bool v1 = DateTime.Equals(dateTime, startdate);
+//bool v2 = DateTime.Equals(dateTime, eindtdate);
+
+//int valid1 = DateTime.Compare(dateTime, startdate);
+//int valid2 = DateTime.Compare(dateTime, eindtdate);
+
+//if (v1 || v2) return sterrenbeeld.Naam;
