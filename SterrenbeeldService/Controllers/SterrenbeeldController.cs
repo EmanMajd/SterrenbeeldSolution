@@ -44,8 +44,8 @@ public class SterrenbeeldController : ControllerBase
 
 	}
 
-	
 
+	[NonAction]
 	public string GetSterrenbeeld(int dag, int maand)
 	{
 		int jaar = 2020;
