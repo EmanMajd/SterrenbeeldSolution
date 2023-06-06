@@ -9,17 +9,21 @@ int dag = int.Parse(Console.ReadLine()!);
 Console.Write("Geef de maand van je geboortedatum: ");
 int maand = int.Parse(Console.ReadLine()!);
 
-//string sterrenbeeld = GetSterrenbeeld(dag, maand);
-
-//Console.WriteLine($"Je sterrenbeeld is: {sterrenbeeld}");
-
-SterrenbeeldController controller= new SterrenbeeldController();
- string sterren = controller.GetSterrenbeeld(dag,maand);
+// zonder client request
+SterrenbeeldController controller = new SterrenbeeldController();
+string sterren = controller.GetSterrenbeeld(dag, maand);
 
 Console.WriteLine($"Je sterren is: {sterren}");
 
+// met client request
+string sterrenbeeld = GetSterrenbeeld(dag, maand);
 
-/*static string GetSterrenbeeld(int dag, int maand)
+Console.WriteLine($"Je sterrenbeeld is: {sterrenbeeld}");
+
+
+
+
+static string GetSterrenbeeld(int dag, int maand)
 {
 	using (var client = new HttpClient())
 	{
