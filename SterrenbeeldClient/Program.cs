@@ -14,20 +14,20 @@ Console.Write("Geef de maand van je geboortedatum: ");
 int maand = int.Parse(Console.ReadLine()!);
 
 // zonder client request
-SterrenbeeldController controller = new SterrenbeeldController();
-string sterren = controller.GetSterrenbeeld(dag, maand);
+//SterrenbeeldController controller = new SterrenbeeldController();
+//string sterren = controller.GetSterrenbeeld(dag, maand);
 
-Console.WriteLine($"Je sterren is: {sterren}");
+//Console.WriteLine($"Je sterren is: {sterren}");
 
 // met client request
-string sterrenbeeld = GetSterrenbeeld(dag, maand);
+//string sterrenbeeld = GetSterrenbeeld(dag, maand);
 
-Console.WriteLine($"Je sterrenbeeld is: {sterrenbeeld}");
-
-
+//Console.WriteLine($"Je sterrenbeeld is: {sterrenbeeld}");
 
 
-static string GetSterrenbeeld(int dag, int maand)
+
+
+/*static string GetSterrenbeeld(int dag, int maand)
 {
 	using (var client = new HttpClient())
 	{
@@ -54,8 +54,8 @@ static string GetSterrenbeeld(int dag, int maand)
 			throw new Exception("Er is een fout opgetreden bij het ophalen van het sterrenbeeld.");
 		}
 	}
-}
-/*
+}*/
+
 using var client = new HttpClient(); 
 var response = await client.GetAsync($"http://localhost:5000/sterrenbeelden/{dag}-{maand}");
 switch (response.StatusCode) 
@@ -63,14 +63,14 @@ switch (response.StatusCode)
 case HttpStatusCode.OK:
 		string sterrenbeeld1 = response.Content.ReadAsStringAsync().Result;
 		Console.WriteLine(sterrenbeeld1);
-	break;
+		break;
 case HttpStatusCode.NotFound: 
 Console.WriteLine("foutieve");
 	break;
 	default:
 Console.WriteLine("Technisch probleem, contacteer de helpdesk.");
 	break;
-}*/
+}
 
 /*app.MapGet("sterrenbeelden", (SterrenbeeldController db) =>
  db.FindAll().ToString());*/
