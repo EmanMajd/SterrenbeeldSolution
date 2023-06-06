@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SterrenbeeldService.Models;
+using System;
 using System.Runtime.Intrinsics.Arm;
 
 namespace SterrenbeeldService.Controllers;
@@ -11,7 +12,7 @@ public class SterrenbeeldController : ControllerBase
 {
 
 
-	
+
 	private static List<Sterrenbeeld> sterrenbeelden = new List<Sterrenbeeld>()
 		{
 			new Sterrenbeeld(){Naam = "steenbok",StartDag = 22, StartMaand= 12, EindDag = 19, EindMaand = 1 },
@@ -30,15 +31,15 @@ public class SterrenbeeldController : ControllerBase
 
 
 	[HttpGet("{dag}-{maand}")]
-	public async Task<ActionResult>  GetSterrenAsync(int dag, int maand) {
+	public ActionResult GetSterren(int dag, int maand) {
 
 		if (!IsValidDatum(dag, maand))
 		{
 			return base.BadRequest("Ongeldige dag of maand.");
 		}
 
-		string sterrenbeeld =  GetSterrenbeeld(dag, maand);
-		return  base.Ok( sterrenbeeld);
+		string sterrenbeeld = GetSterrenbeeld(dag, maand);
+		return base.Ok(sterrenbeeld);
 
 
 	} //=> base.Ok(sterrenbeelden);
@@ -48,19 +49,76 @@ public class SterrenbeeldController : ControllerBase
 		return dag >= 1 && dag <= 31 && maand >= 1 && maand <= 12;
 	}
 
-	private string GetSterrenbeeld(int dag, int maand)
+	public string GetSterrenbeeld(int dag, int maand)
 	{
-		foreach (var sterrenbeeld in sterrenbeelden)
+		int jaar = 2020;
+		try
 		{
-			if ((maand == sterrenbeeld.StartMaand && dag >= sterrenbeeld.StartDag)
-				|| (maand == sterrenbeeld.EindMaand && dag <= sterrenbeeld.EindDag))
+			string date = $"{jaar}{maand}{dag}";
+			DateTime dateTime = new DateTime(jaar, maand, dag);
+		
+			foreach (var sterrenbeeld in sterrenbeelden)
 			{
-				return sterrenbeeld.Naam;
+				DateTime startdate = new DateTime(jaar, sterrenbeeld.StartMaand, sterrenbeeld.StartDag);
+				DateTime eindtdate = new DateTime(jaar, sterrenbeeld.EindMaand, sterrenbeeld.EindDag);
+
+				bool v1 = DateTime.Equals(dateTime, startdate);
+				bool v2 = DateTime.Equals(dateTime, eindtdate);
+
+				if (v1 || v2) return sterrenbeeld.Naam;
+				
+				/*DateTime validDate;
+				bool t= DateTime.TryParse( date, out validDate);
+
+				bool x1 = DateTime.Equals(validDate, startdate);
+				bool x2 = DateTime.Equals(validDate, eindtdate);
+
+				if (t)
+				{
+
+					if (x1 || x2) return sterrenbeeld.Naam;
+				}*/
+
+				
+			}
+
+		}
+		catch (Exception ex)
+		{
+			return $"Invalid date: {ex.Message}";
+		}
+		return string.Empty;
+
+	}
+
+
+	/*private string GetSterrenbeeld(int dag, int maand)
+	{
+
+		if (maand > 12 || maand < 1) return "Tick een maandnummer tussen 1 en 12";
+		else if (dag < 1 || dag > 31)
+		{
+			if (maand == 2)
+			{
+				if (dag > 29) return "Maand february heeft alleen 29 dagen";
 			}
 		}
+		else
+		{
+			foreach (var sterrenbeeld in sterrenbeelden)
+			{
 
+				if ((maand == sterrenbeeld.StartMaand && dag >= sterrenbeeld.StartDag)
+					|| (maand == sterrenbeeld.EindMaand && dag <= sterrenbeeld.EindDag))
+				{
+					return sterrenbeeld.Naam;
+				}
+			}
+
+		}
 		return string.Empty;
-	}
+
+	}*/
 }
 
 
