@@ -16,7 +16,7 @@ public class SterrenbeeldController : ControllerBase
 
 	private static List<Sterrenbeeld> sterrenbeelden = new List<Sterrenbeeld>()
 		{
-			new Sterrenbeeld(){Naam = "steenbok",StartDag = 22, StartMaand= 12, EindDag = 19, EindMaand = 1 },
+			new Sterrenbeeld(){Naam ="steenbok", StartDag =22, StartMaand=12, EindDag = 19,EindMaand = 1 },
 			new Sterrenbeeld(){Naam ="waterman", StartDag =20, StartMaand=1, EindDag = 18,EindMaand = 2 },
 			new Sterrenbeeld(){Naam ="vissen", StartDag = 19, StartMaand=2, EindDag = 20,EindMaand = 3 },
 			new Sterrenbeeld(){Naam ="ram", StartDag = 21, StartMaand=3, EindDag = 19,EindMaand = 4 },
@@ -51,28 +51,29 @@ public class SterrenbeeldController : ControllerBase
 		int jaar = 2020;
 		try
 		{
-			string date = $"{jaar}{maand}{dag}";
 			DateTime dateTime = new DateTime(jaar, maand, dag);
-		
+			string sterrenbeeldNaam = null;
+
 			foreach (var sterrenbeeld in sterrenbeelden)
 			{
 				DateTime startdate = new DateTime(jaar, sterrenbeeld.StartMaand, sterrenbeeld.StartDag);
 				DateTime eindtdate = new DateTime(jaar, sterrenbeeld.EindMaand, sterrenbeeld.EindDag);
 
+				if (dateTime >= startdate && dateTime <= eindtdate ) 
+					sterrenbeeldNaam =  sterrenbeeld.Naam;
 
-
-				int valid1 = DateTime.Compare(dateTime, startdate);
-				int valid2 = DateTime.Compare(dateTime, eindtdate);
-
-				if (valid1 <= 0 && valid2 >= 0) return sterrenbeeld.Naam;
+				if (startdate.Month == 12 && startdate.Day >= 22 || eindtdate.Month == 1 && eindtdate.Day <= 19)
+					sterrenbeeldNaam = "steenbok";
 			}
+
+
+			return sterrenbeeldNaam;
 
 		}
 		catch (Exception ex)
 		{
 			return $"Invalid date: {ex.Message}";
 		}
-		return string.Empty;
 
 	}
 
@@ -81,9 +82,8 @@ public class SterrenbeeldController : ControllerBase
 
 //bool v1 = DateTime.Equals(dateTime, startdate);
 //bool v2 = DateTime.Equals(dateTime, eindtdate);
-//if (dateTime >= startdate && dateTime <= eindtdate ) return sterrenbeeld.Naam;
+//if (v1 || v2) return sterrenbeeld.Naam;
 
 //int valid1 = DateTime.Compare(dateTime, startdate);
 //int valid2 = DateTime.Compare(dateTime, eindtdate);
-
-//if (v1 || v2) return sterrenbeeld.Naam;
+//if (valid1 <= 0 || valid2 >= 0) return sterrenbeeld.Naam;
